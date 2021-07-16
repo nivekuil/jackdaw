@@ -5,7 +5,8 @@
             [jackdaw.streams :as js]
             [clojure.spec.alpha :as s])
   (:import org.apache.kafka.common.TopicPartition
-           org.apache.kafka.streams.processor.StateRestoreListener))
+           org.apache.kafka.streams.processor.StateRestoreListener
+           [java.time Instant Duration]))
 
 (set! *warn-on-reflection* true)
 
@@ -38,7 +39,7 @@
                              ^String storeName
                              ^long startingOffset
                              ^long endingOffset]
-       (swap! restore-tracker assoc storeName (java.time.Instant/now))
+       (swap! restore-tracker assoc storeName (Instant/now))
        (log/warnf "Restoring state store (%s.%d) over offsets %s...%s"
                   (.topic topicPartition) (.partition topicPartition)
                   startingOffset endingOffset))
@@ -55,9 +56,8 @@
                            ^String storeName
                            ^long totalRestored]
        (let [start-date  (get @restore-tracker storeName)
-             elapsed-sec (.getSeconds (java.time.Duration/between
-                                       start-date
-                                       (java.time.Instant/now)))]
+             elapsed-sec (.getSeconds (Duration/between start-date
+                                                        (Instant/now)))]
          (log/warnf "Finished restoring state store (%s.%d) elapsed %s"
                     (.topic topicPartition) (.partition topicPartition)
                     elapsed-sec))))))
