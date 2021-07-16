@@ -1,7 +1,7 @@
 # Changelog
 
 ## Unreleased
-* Add reduced arity (without topic-config) `aggregate` functions to windowed streams.
+* Drop clj-time dependency
 
 * Added confluent schema registry support for JSON Schema
 
