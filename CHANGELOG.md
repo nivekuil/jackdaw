@@ -3,6 +3,8 @@
 ## Unreleased
 * Add reduced arity (without topic-config) `aggregate` functions to windowed streams.
 
+* Added confluent schema registry support for JSON Schema
+
 ### Added
 
 * Add KStream-KTable inner join.
