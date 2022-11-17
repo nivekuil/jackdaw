@@ -184,8 +184,10 @@
 
 (defn process!
   "Applies `processor-fn` to each item in the input stream."
-  [kstream processor-fn state-store-names]
-  (p/process! kstream processor-fn state-store-names))
+  ([kstream processor-fn]
+   (p/process! kstream processor-fn))
+  ([kstream processor-fn state-store-names]
+   (p/process! kstream processor-fn state-store-names)))
 
 (defn select-key
   "Create a new key from the current key and value.
