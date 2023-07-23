@@ -326,7 +326,7 @@
     (clj-kstream
      (.process ^KStream kstream
               ^ProcessorSupplier (processor-supplier processor-supplier-fn)
-              ^"[Ljava.lang.String;" (into-array String state-store-names)))
+              ^"[Ljava.lang.String;" (into-array String state-store-names))))
 
   (select-key
     [_ select-key-value-mapper-fn]
