@@ -150,6 +150,7 @@
     windowed outer join.")
 
   (process!
+    [kstream processor-fn]
     [kstream processor-fn state-store-names]
     "Applies `processor-fn` to each item in the input stream.")
 

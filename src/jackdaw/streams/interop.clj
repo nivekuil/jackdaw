@@ -318,8 +318,12 @@
                  (StreamJoined/with key-serde value-serde other-value-serde))))
 
   (process!
+    [this processor-supplier-fn]
+    (process! this processor-supplier-fn []))
+
+  (process!
     [_ processor-supplier-fn state-store-names]
-    (.process ^KStream kstream
+     (.process ^KStream kstream
               ^ProcessorSupplier (processor-supplier processor-supplier-fn)
               ^"[Ljava.lang.String;" (into-array String state-store-names)))
 

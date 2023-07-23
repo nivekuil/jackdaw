@@ -148,14 +148,14 @@
   Processor
   (close [_])
   (init [_ processor-context]
-    (reset! context processor-context))
+    (vreset! context processor-context))
   (process [_ record]
-    (processor-fn @context (.key record) (.value record))))
+    (processor-fn @context record)))
 
 (defn processor
   "Packages up a Clojure fn as a kstream processor."
   [processor-fn]
-  (FnProcessor. (atom nil) processor-fn))
+  (FnProcessor. (volatile! nil) processor-fn))
 
 (deftype FnProcessorSupplier [processor-supplier-fn]
   ProcessorSupplier
